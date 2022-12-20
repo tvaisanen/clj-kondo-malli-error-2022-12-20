@@ -1,0 +1,5 @@
+{:linters {:unresolved-symbol {:exclude [(malli.core/=>)]},
+           :type-mismatch {:namespaces {foo {foo {:arities {2 {:args [{:op :keys,
+                                                                       :req {:keys {:op :rest, :spec :keyword}}}
+                                                                      :any],
+                                                               :ret :any}}}}}}}}
