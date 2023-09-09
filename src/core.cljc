@@ -9,7 +9,7 @@
   [_a :- [:map [:keys [:+ :keyword]]]
    _b :- :any])
 
-(defn case-1 [x])
+(defn case-1 [_x])
 (m/=> case-1 [:=>
               [:cat [:map [:keys [:+ :keyword]]]]
               :nil])
@@ -22,7 +22,7 @@
 ;; malli error since not a keyword
 (case-1 {:keys [1]})
 
-(defn case-2 [x])
+(defn case-2 [_x])
 (m/=> case-2 [:=>
               [:cat [:map [:keys [:? :int]]]]
               :nil])
@@ -34,7 +34,7 @@
 ;; malli error since more than 1
 (case-2 {:keys [1 1]})
 
-(defn case-3 [x])
+(defn case-3 [_x])
 (m/=> case-3 [:=>
               [:cat [:map [:keys [:* :string]]]]
               :nil])
@@ -47,7 +47,7 @@
 (case-3 {:keys [:a]})
 (case-3 {:keys [1 1]})
 
-(comment
-  ;; generates clj-kondo types
-  (dev/start!)
-  (dev/stop!))
+(defn run
+  "Generate clj-kondo types"
+  [_]
+  (dev/start!))

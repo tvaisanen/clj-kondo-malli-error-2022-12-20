@@ -1,3 +1,4 @@
 {:paths ["src"]
  :deps  {metosin/malli {:git/url "https://github.com/tvaisanen/malli"
-                        :git/sha "0212c019a73b85c218690b950f1a06633e9f8b38"}}}
+                        :git/sha "852d7c3fd445071ae66165f8382e486fe3a8343f"}}
+ :aliases {:generate-types {:exec-fn core/run}}}

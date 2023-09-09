@@ -1,0 +1,46 @@
+* Validate malli/#830 fix
+
+#+begin_src clojure
+{:paths ["src"]
+ :deps  {metosin/malli {:git/url "https://github.com/tvaisanen/malli"
+                        :git/sha "852d7c3fd445071ae66165f8382e486fe3a8343f"}}
+ :aliases {:generate-types {:exec-fn core/run}}}
+#+end_src
+
+* Steps To Validate
+
+Generate types
+
+#+begin_src bash
+    ❯ clj -X:generate-types
+    started instrumentation
+
+#+end_src
+
+Check types
+
+#+begin_src bash
+  ❯ cat .clj-kondo/metosin/malli-types-clj/config.edn
+#+end_src
+
+#+begin_src clojure
+  {:linters
+   {:unresolved-symbol {:exclude [(malli.core/=>)]},
+    :type-mismatch
+    {:namespaces
+     {core {foo {:arities {2 {:args [{:op :keys, :req {:keys :seqable}} :any],
+                              :ret :any}}},
+            case-1 {:arities {1 {:args [{:op :keys, :req {:keys :seqable}}],
+                                 :ret :nil}}},
+            case-2 {:arities {1 {:args [{:op :keys, :req {:keys :seqable}}],
+                                 :ret :nil}}},
+            case-3 {:arities {1 {:args [{:op :keys, :req {:keys :seqable}}],
+                                 :ret :nil}}}}}}}}
+
+#+end_src
+
+Run lint
+#+begin_src bash
+ ❯ clj-kondo --lint src/core.cljc
+ linting took 12ms, errors: 0, warnings: 0
+#+end_src
